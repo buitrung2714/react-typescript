@@ -4,4 +4,4 @@ export enum AuthActionType {
 export enum TopMovieType {
   GET_MOVIE = "GET_MOVIE",
   TOGGLE_WATCHED = "TOGGLE_WATCHED",
-}sdsa
+}sdsa22222
