@@ -1,16 +1,21 @@
-import { Box } from "@material-ui/core"
+import { Box } from "@material-ui/core";
 
-interface WelcomeMessageProps{
-    position: string,
-    country?: string
+interface WelcomeMessageProps {
+  position: string;
+  country?: string;
+  username: string;
 }
 
-const WelcomeMessage = ({position, country = "Vietnam"}: WelcomeMessageProps) => {
-    return (
-        <Box>
-            Welcome {position} from {country}
-        </Box>
-    )
-}
+const WelcomeMessage = ({
+  position,
+  username,
+  country = "Vietnam",
+}: WelcomeMessageProps) => {
+  return (
+    <Box>
+      Welcome {username} - {position} from {country}
+    </Box>
+  );
+};
 
-export default WelcomeMessage
+export default WelcomeMessage;

@@ -51,7 +51,7 @@ const Movie = () => {
           onChange={changeTitle}
           value={title}
         />
-        <Button variant="contained" color="primary" onClick={addE}>
+        <Button variant="contained" color={theme} onClick={addE}>
           Add
         </Button>
       </Box>

@@ -14,6 +14,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { progressContext } from "../contexts/ProgressContext";
 import { themeContext } from "../contexts/ThemeContext";
 import WelcomeMessage from "./WelcomeMessage";
+import Login from "./Login";
+import { authContext } from "../contexts/AuthContext";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,6 +36,9 @@ const Navbar = () => {
   //State Position
   const [position, setPosition] = useState("Full Stack Developer");
 
+  //State Login
+  const [loginState, setLoginState] = useState(false);
+
   //State Timer
   const [timer, setTimer] = useState<Date>(new Date(Date.now()));
 
@@ -48,6 +53,12 @@ const Navbar = () => {
 
   //Context Theme
   const { theme } = useContext(themeContext);
+
+  //Context Auth
+  const {
+    authInfo: { isAuthenticated, username },
+    toggleAuth,
+  } = useContext(authContext);
 
   //Change
   const changePosition = (
@@ -69,7 +80,7 @@ const Navbar = () => {
           <Typography variant="h6">My movies</Typography>
 
           <Box textAlign="center">
-            <WelcomeMessage position={position} />
+            <WelcomeMessage position={position} username={username} />
             <Chip
               label={`Date: ${lastTime} - In Progress: ${status}`}
               className={classes.chipLabel}
@@ -99,9 +110,19 @@ const Navbar = () => {
             <Box my={1}>
               <Typography variant="h6">{timer.toUTCString()}</Typography>
             </Box>
-            <Button variant="contained">Login</Button>
+            <Button
+              variant="contained"
+              onClick={
+                isAuthenticated
+                  ? toggleAuth.bind(this, "")
+                  : setLoginState.bind(this, true)
+              }
+            >
+              {isAuthenticated ? `Logout` : `Login`}
+            </Button>
           </Box>
         </Box>
+        <Login isOpen={loginState} handleClose={setLoginState} />
       </Toolbar>
     </AppBar>
   );
